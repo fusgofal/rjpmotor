@@ -8,3 +8,15 @@ h1{
 	font-size: 3em;
 	margin-top: 1em;
 }
+
+.buscador-home{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.list-group-item{
+	min-height: 200px;	
+	border: none;
+}
+.contenido-home{
+	margin-top: 2em;
+}
