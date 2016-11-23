@@ -6,6 +6,9 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" lang=""> <!--<![endif]-->
 <head>
+
+
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title></title>
@@ -51,16 +54,15 @@
 			<div class="col-sm-6 buscador-home" >
 				<div class="input-group">
 					<div class="input-group-btn">
-						<button type="button" class="btn btn-info">Action</button>
+						<button type="button" class="btn btn-info">Cities</button>
 						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Action</a></li>
+							{% for city in cities %}
+								<li><a href="#">{{ city.name }}</a></li>
+							{% endfor %}
 						</ul>
 					</div>              
 					<input type="text" class="form-control" placeholder="Encuentre lo que busca" />
@@ -74,95 +76,56 @@
 
 		<div class="col-sm-3 ">
 			<div class="form-group">
-				<label for="">Tipo de comida</label>
+				<label for="">Categories</label>
 				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">Todo
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">bbbb
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">cccc
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">dddd
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">eeee
-					</label>
-				</div>
+						<label for="">
+							<input type="checkbox">Todas las categorias
+						</label>
+					</div>
+				{% for	category in categories %}
+					<div class="checkbox">
+						<label for="">
+							<input type="checkbox">{{ category.name }}
+						</label>
+					</div>
+				{% endfor %}
 			</div>
 
 
 			<div class="form-group">
 				<label for="">Formas de pago</label>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">Todo
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">bbbb
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">cccc
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">dddd
-					</label>
-				</div>
-				<div class="checkbox">
-					<label for="">
-						<input type="checkbox">eeee
-					</label>
-				</div>
+					<div class="checkbox">
+						<label for="">
+							<input type="checkbox">Todas formas de pago
+						</label>
+					</div>
+				{% for payment in payments %}
+					<div class="checkbox">
+						<label for="">
+							<input type="checkbox">{{ payment.pay }}
+						</label>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 
 		<div class="col-sm-9">
 			<div class="list-group">
-				<a href="" class="list-group-item">
-					<div class="col-sm-3">
-						<img src="{% static 'img/icono_ejemplo.png' %}" class="img-rounded media-object img-responsive" alt="image">
-					</div>
-					<div class="col-sm-6">
-						<h3>Titulo</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nobis dolor deserunt alias sequi cumque inventore ipsam dolorem officiis, </p>
-					</div>
-					<div class="col-sm-3 text-center">
-						<h2>5 <small>tips</small></h2>
-						<button type="button" class="btn btn-primary btn-lg ">Ver detalles</button>
-					</div>
-				</a>
-
-
-				<a href="" class="list-group-item">
-					<div class="col-sm-3">
-						<img src="{% static 'img/icono_ejemplo.png' %}" class="img-rounded media-object img-responsive" alt="image">
-					</div>
-					<div class="col-sm-6">
-						<h3>Titulo</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit nobis dolor deserunt alias sequi cumque inventore ipsam dolorem officiis, </p>
-					</div>
-					<div class="col-sm-3 text-center">
-						<h2>5 <small>tips</small></h2>
-						<button type="button" class="btn btn-primary btn-lg ">Ver detalles</button>
-					</div>
-				</a>
+				{% for restaurant in restaurants %}
+					<a href="" class="list-group-item">
+						<div class="col-sm-3">
+							<img src="{{restaurant.image}}" class="img-rounded media-object img-responsive" alt="image">
+						</div>
+						<div class="col-sm-6">
+							<h3>{{restaurant.name}}</h3>
+							<p>{{restaurant.desciption}} </p>
+						</div>
+						<div class="col-sm-3 text-center">
+							<h2>5 <small>tips</small></h2>
+							<button type="button" class="btn btn-primary btn-lg ">Ver detalles</button>
+						</div>
+					</a>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
