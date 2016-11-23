@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.app1',
+    'social.apps.django_app.default',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,7 +61,7 @@ WSGI_APPLICATION = 'rjpmotors.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Restaurant',
+        'NAME': 'otra',
         'USER': 'colombia',
         'PASSWORD': 'colombia',
         'HOST': 'localhost',
@@ -87,3 +89,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'fotos/fotos')
 MEDIA_URL = 'http://localhots:80000/fotos/'
+
+
+
+AUTHENTICATION_BACKENDS = (
+        'social.backends.facebook.FacebookAppOAuth2',
+        'social.backends.facebook.FacebookOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+
+
+    )
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '733270286704397'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'ff64ecddc1cdd22bd65032f9c465811f'
