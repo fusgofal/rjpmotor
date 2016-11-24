@@ -9,9 +9,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('apps.app1.urls')),
     url(r'^fotos/(?P<path>.*)$','django.views.static.serve',
     		{'document_root':settings.MEDIA_ROOT,}
     	),
+    url(r'^', include('apps.app1.urls')),
     url('', include('social.apps.django_app.urls', namespace = 'social'))
 )
