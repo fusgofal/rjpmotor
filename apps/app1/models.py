@@ -23,7 +23,7 @@ class Restaurant(models.Model):
 	category = models.ManyToManyField(Category)
 	name = models.CharField(max_length=50)
 	desciption = models.CharField(max_length=200)
-	image = models.ImageField(upload_to = 'images')
+	imagen = models.ImageField(upload_to = 'foto')
 
 	def __unicode__(self):
 		return self.name

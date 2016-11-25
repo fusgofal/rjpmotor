@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'rjpmotors.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'otra',
+        'NAME': 'restaurant',
         'USER': 'colombia',
         'PASSWORD': 'colombia',
         'HOST': 'localhost',
@@ -87,8 +87,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
-MEDIA_URL = 'http://localhots:80000/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'localhost:8000/media/fotos/'
 
 
 
