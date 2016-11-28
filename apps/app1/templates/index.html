@@ -64,7 +64,7 @@
 							{% endfor %}
 						</ul>
 					</div>              
-					<input type="text" class="form-control" placeholder="Encuentre lo que busca" />
+					<input type="text" id="buscador-ciudades" class="form-control" placeholder="Encuentre lo que busca" />
 				</div>
 
 			</div>
@@ -112,9 +112,8 @@
 			<div class="list-group">
 				{% for restaurant ,tips in restaurants %}
 					<a href="" class="list-group-item">
-						<div class="col-sm-3">
-							<img src="/media/{{uh
-							irestaurant.imagen.name}}" class="img-rounded media-object img-responsive" alt="image">
+						<div class="col-sm-3 div_imagen">
+							<img src="/media/{{restaurant.imagen.name}}" class="imgg_ img-rounded media-object img-responsive" alt="image">
 						</div>
 						<div class="col-sm-6">
 							<h3>{{restaurant.name}}</h3>
@@ -137,6 +136,10 @@
 
 	<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"></script>
 	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/vendor/underscore-min.js' %}"></script>
+	<script src="{% static 'js/vendor/backbone-min.js' %}"></script>
+	<script src="{% static 'js/backbone/routes/ruta.js' %}"></script>
+
 	<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
