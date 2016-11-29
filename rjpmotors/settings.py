@@ -30,24 +30,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'apps.app1',
-    'social.apps.django_app.default',
-    'rest_framework',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'apps.app1',
+	'apps.app2',
+	'social.apps.django_app.default',
+	'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'rjpmotors.urls'
@@ -59,14 +60,14 @@ WSGI_APPLICATION = 'rjpmotors.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'restaurant',
-        'USER': 'colombia',
-        'PASSWORD': 'colombia',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'restaurant',
+		'USER': 'colombia',
+		'PASSWORD': 'colombia',
+		'HOST': 'localhost',
+		'PORT': '5432',
+	}
 }
 
 # Internationalization
@@ -93,12 +94,12 @@ MEDIA_URL = 'localhost:8000/media/fotos/'
 
 
 AUTHENTICATION_BACKENDS = (
-        'social.backends.facebook.FacebookAppOAuth2',
-        'social.backends.facebook.FacebookOAuth2',
-        'django.contrib.auth.backends.ModelBackend',
+		'social.backends.facebook.FacebookAppOAuth2',
+		'social.backends.facebook.FacebookOAuth2',
+		'django.contrib.auth.backends.ModelBackend',
 
 
-    )
+	)
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 

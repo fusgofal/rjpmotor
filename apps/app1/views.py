@@ -17,3 +17,8 @@ class IndexView(TemplateView):
 		context['restaurants'] = zip(restaurants, tips)
 		context["MEDIA_URL"] = 'localhost:8000/media/'
 		return context
+
+
+class DetalleView(TemplateView):
+	template_name = 'detalle.html'
+
