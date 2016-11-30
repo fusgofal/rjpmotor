@@ -4,7 +4,7 @@ from rest_framework.decorators import list_route
 
 
 
-from .models import Restaurant
+from .models import Restaurant, Tip
 from  serializers import RestaurantSerializer, TipSerializer
 from django.db.models import Count
 
@@ -12,7 +12,7 @@ from django.db.models import Count
 class RestaurantViewSet(viewsets.ModelViewSet):
 	model = Restaurant
 	serializer_class = RestaurantSerializer
-	queryset = Restaurant.objects.all().annotate(tips=Count('tip')).order_by('tips')
+	queryset = Restaurant.objects.all().annotate(tips=Count('tip')).order_by('id')
 
 	@list_route()
 	def tips(self, request, pk=None):

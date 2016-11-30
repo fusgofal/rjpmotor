@@ -20,6 +20,16 @@
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 	<script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+
+
+
+	<script>
+	window.ciudad = -1;
+	window.categoria = -1;
+	window.pago = -1;
+	</script>
+
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -57,13 +67,13 @@
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button type="button" class="btn btn-info">Cities</button>
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="city">
 							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
+							<span class="sr-only">Elige la ciudad</span>
 						</button>
-						<ul class="dropdown-menu" role="menu">
+						<ul class="dropdown-menu" role="menu" id="ciudad">
 							{% for city in cities %}
-								<li><a href="#">{{ city.name }}</a></li>
+								<li><a id="{{city.id}}" href="#">{{ city.name }}</a></li>
 							{% endfor %}
 						</ul>
 					</div>              
@@ -81,13 +91,13 @@
 				<label for="">Categories</label>
 				<div class="checkbox">
 						<label for="">
-							<input type="checkbox">Todas las categorias
+							<input class="categoria" id="{{category.id}}" type="checkbox">Todas las categorias
 						</label>
 					</div>
 				{% for	category in categories %}
 					<div class="checkbox">
 						<label for="">
-							<input type="checkbox">{{ category.name }}
+							<input class="pago" id="{{payment.id}}" type="checkbox">{{ category.name }}
 						</label>
 					</div>
 				{% endfor %}
@@ -141,8 +151,12 @@
 	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/vendor/underscore-min.js' %}"></script>
 	<script src="{% static 'js/vendor/backbone-min.js' %}"></script>
-	<script src="{% static 'js/backbone/routes/ruta.js' %}"></script>
 
+
+
+	<script src="{% static 'js/backbone/routes/ruta.js' %}"></script>
+	<script src="{% static 'js/backbone/collections/collections.js' %}"></script>
+	<script src="{% static 'js/backbone/views/app.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
