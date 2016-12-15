@@ -8,13 +8,13 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Restaurant
-		#fields = '__all__'
-		exclude = ('payment','category')
+		fields = '__all__'
+		#exclude = ('payment','category')
 
 class TipSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tip
-		#fields = '__all__'
+		fields = '__all__'
 
 

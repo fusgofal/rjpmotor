@@ -10,12 +10,12 @@ var ruta = Backbone.Router.extend({
 	},
 
 	restaurant: function(){
-		console.log("His is a real shiitt MotherFacker")
-
+		window.stadeUrl = 'principal';
 	},
 
 	detalleRestaurant: function(id){
-		console.log(id)
+		window.stadeUrl = 'detalle';
+		window.restaurantID = Id;
 	},
 
 
@@ -24,4 +24,4 @@ var ruta = Backbone.Router.extend({
 
 app.route = new ruta();
 Backbone.history.start();
-Backbone.history.navigate('Home');
+//Backbone.history.navigate('Inicio');

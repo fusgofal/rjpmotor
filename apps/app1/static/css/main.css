@@ -2,7 +2,9 @@
 	margin: 0;
 	padding: 0;
 }
-
+body{
+	padding-top: 6em; 
+}
 
 
 .buscador-home{
@@ -24,3 +26,12 @@
 
 }
 
+.categorias, .formas-de-pago, .tu-mejor-restaurante{
+	color: #5C5C5C;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.navbar{
+	padding: 5px 0;
+}

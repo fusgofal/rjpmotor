@@ -19,3 +19,10 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 		tips = Tip.objects.filter(restaurant__pk = pk)
 		serializer = TipSerializer(tips, many=True)
 		return Response(serializer.data)
+
+
+class TipsViewSet(viewsets.ModelViewSet):
+	model = Tip
+	serializer_class = TipSerializer
+	queryset = Tip.objects.all()
+	

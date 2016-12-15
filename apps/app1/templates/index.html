@@ -25,14 +25,23 @@
 
 
 	<script>
-	window.ciudad = -1;
-	window.categoria = -1;
-	window.pago = -1;
+		window.ciudad = -1;
+		window.categoria = -1;
+		window.pago = -1;
 	</script>
 
+
+	<script type="text/template" id="tplDetalle">
+		
+	</script>
+
+
 </head>
+
+
+
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header col-sm-10">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
@@ -43,12 +52,12 @@
 				</button>
 				<a class="navbar-brand" href="#">.::RJP-Motors::.</a>
 			</div>
-			<div class="btn btn-info botton_user col-sm-2">
+			<div class="btn btn-primary botton_user col-sm-2">
 				{% if user.is_authenticated %}
 					{{user.username}}
 				{% else %}
 					<div class="collapse navbar-collapse navbar-right" id="menu">
-						<a href="{% url 'social:begin' 'facebook' %}" class=" btn btn-default navbar-btn">Ingrese Con Facebook</a>
+						<a href="{% url 'social:begin' 'facebook' %}" class=" btn btn-default ">Ingrese Con Facebook</a>
 					</div>
 				{% endif %}
 				
@@ -59,15 +68,15 @@
 	<div class="container">
 		<div class="row ">
 			<div class="col-sm-6 ">
-				<h3>Esto es un simple subtítulo</h3>  
+				<h3 class="tu-mejor-restaurante">Encuentra tu mejor restaurante</h3>  
 
 			</div>
 
 			<div class="col-sm-6 buscador-home" >
 				<div class="input-group">
 					<div class="input-group-btn">
-						<button type="button" class="btn btn-info">Cities</button>
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="city">
+						<button type="button" class="btn btn-primary">Cities</button>
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="city">
 							<span class="caret"></span>
 							<span class="sr-only">Elige la ciudad</span>
 						</button>
@@ -88,9 +97,9 @@
 
 		<div class="col-sm-3 ">
 			<div class="form-group">
-				<label for="">Categories</label>
+				<label class="categorias" for="">Categories</label>
 				<div class="checkbox">
-						<label for="">
+						<label class="all-categories " for="">
 							<input class="categoria" id="{{category.id}}" type="checkbox">Todas las categorias
 						</label>
 					</div>
@@ -102,13 +111,14 @@
 					</div>
 				{% endfor %}
 			</div>
-
+			<br />
+			<br />
 
 			<div class="form-group">
-				<label for="">Formas de pago</label>
+				<label class="formas-de-pago" for="">Formas de pago</label>
 					<div class="checkbox">
-						<label for="">
-							<input type="checkbox">Todas formas de pago
+						<label class="all-categories" for="">
+							<input  type="checkbox">Todas formas de pago
 						</label>
 					</div>
 				{% for payment in payments %}
@@ -124,7 +134,7 @@
 		<div class="col-sm-9">
 			<div class="list-group">
 				{% for restaurant ,tips in restaurants %}
-					<a href="" class="list-group-item">
+					<a href="detalle/restaurant/{{restaurant.id}}/ " class="list-group-item">
 						<div class="col-sm-3 div_imagen">
 							<img src="/media/{{restaurant.imagen.name}}" class="imgg_ img-rounded media-object img-responsive" alt="image">
 						</div>
@@ -134,15 +144,16 @@
 						</div>
 						<div class="col-sm-3 text-center">
 							<h2>{{ tips }} <small>tips</small></h2>
-							<button type="button" class="btn btn-primary btn-lg ">Ver detalles</button>
 						</div>
+						<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Ver Detalle </button>
 					</a>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
+
+
+
 
 
 
@@ -154,9 +165,47 @@
 
 
 
+	<script src="{% static 'js/backbone/models/models.js' %}"></script>
 	<script src="{% static 'js/backbone/routes/ruta.js' %}"></script>
 	<script src="{% static 'js/backbone/collections/collections.js' %}"></script>
-	<script src="{% static 'js/backbone/views/app.js' %}"></script>
+	<script src="{% static 'js/backbone/views/views.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+
+
+
+<!--
+	<script>
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementsByClassName("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal 
+		btn.onclick = function() {
+		    modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		    modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
+		}
+	</script>
+
+-->
 </body>
 </html>
