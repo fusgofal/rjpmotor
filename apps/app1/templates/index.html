@@ -17,9 +17,9 @@
 
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 	<script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 
 
@@ -31,9 +31,68 @@
 	</script>
 
 
-	<script type="text/template" id="tplDetalle">
-		
+	<script type="text/template" id="tplRestaurantes">
+		<div class="list-group">
+			{% for restaurant ,tips in restaurants %}
+				<a id="{{restaurant.id}}" class="list-group-item">
+					<div class="col-sm-3 div_imagen">
+						<img src="/media/{{restaurant.imagen.name}}" class="imgg_ img-rounded media-object img-responsive" alt="image">
+					</div>
+					<div class="col-sm-6">
+						<h3>{{restaurant.name}}</h3>
+						<p>{{restaurant.desciption}} </p>
+					</div>
+					<div class="col-sm-3 text-center">
+						<h2>{{ tips }} <small>tips</small></h2>
+					</div>
+					<button type="button" data-id="{{restaurant.id}}" class="btn btn-lg btn-primary restaurantes" >Ver Detalle </button>
+				</a>
+			{% endfor %}
+		</div>
 	</script>
+	
+
+	<script type="text/template" id="tplDetalle">
+
+		<h2 class="page-header col-lg-12"><%= todosRestaurantes.get("name") %></h2>
+		<div class="row">
+			<div class="col-lg-6">
+				<img class="imagen-modal img-rounded media-object img-responsive" src="/media/<%= todosRestaurantes.get('imagen_name') %>" alt="">
+			</div>
+			<div class="col-lg-6">
+				<p class="lead"><%= todosRestaurantes.get("desciption") %></p>
+				<br />
+				<br />
+				<p>Tipos de pago: <%= todosRestaurantes.payment %></p>
+				<br>
+				<p>tipos de comida: asdasd asdasd adss</p>
+			</div>
+		</div>
+		<div class="container-items-modal">
+			<h4 class="page-header subtitle-modal">Tips</h4>
+			<% todosRestaurantes.get("tip_set").forEach(function( asd) {%>
+
+				<div class="container-user "><span class="glyphicon glyphicon-user " aria-hidden="true"><%= asd.usuario %></span></div>
+				<div class="panel panel-default">
+					<div class="panel-body"><span class="container-description-modal"><%= asd.content %></span></div><br/>
+					
+				</div>
+
+			<%});%>
+			<form action="">
+				<div class="form-group">
+				    <label for="exampleInputEmail1">Deja un Tip/Comentario.</label>
+				    <input type="text" class="form-control"  placeholder="Deje un Tip">
+				</div>
+				 <button type="submit" class="btn btn-default">Enviar</button>
+			</form>
+		</div>
+	</script>
+
+
+
+
+
 
 
 </head>
@@ -131,26 +190,32 @@
 			</div>
 		</div>
 
-		<div class="col-sm-9">
-			<div class="list-group">
-				{% for restaurant ,tips in restaurants %}
-					<a href="detalle/restaurant/{{restaurant.id}}/ " class="list-group-item">
-						<div class="col-sm-3 div_imagen">
-							<img src="/media/{{restaurant.imagen.name}}" class="imgg_ img-rounded media-object img-responsive" alt="image">
-						</div>
-						<div class="col-sm-6">
-							<h3>{{restaurant.name}}</h3>
-							<p>{{restaurant.desciption}} </p>
-						</div>
-						<div class="col-sm-3 text-center">
-							<h2>{{ tips }} <small>tips</small></h2>
-						</div>
-						<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Ver Detalle </button>
-					</a>
-				{% endfor %}
-			</div>
+		<div class="col-sm-9" id="container-restaurantes">
+			
 		</div>
 	</div>
+
+
+		<!--   MODALLLLLLL-->
+
+	<div data-target=".bs-example-modal-lg" class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog modal-lg">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	      <div id="continer-detalle">
+	      	
+	      </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	</div>
+
 
 
 
@@ -175,37 +240,5 @@
 
 
 
-
-
-<!--
-	<script>
-		// Get the modal
-		var modal = document.getElementById('myModal');
-
-		// Get the button that opens the modal
-		var btn = document.getElementsByClassName("myBtn");
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
-
-		// When the user clicks the button, open the modal 
-		btn.onclick = function() {
-		    modal.style.display = "block";
-		}
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-		    modal.style.display = "none";
-		}
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-		    if (event.target == modal) {
-		        modal.style.display = "none";
-		    }
-		}
-	</script>
-
--->
 </body>
 </html>

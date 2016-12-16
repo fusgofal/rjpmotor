@@ -12,8 +12,8 @@ body{
 	margin-bottom: 10px;
 }
 .list-group-item{
-	min-height: 200px;	
 	border: none;
+	min-height: 200px;	
 }
 .contenido-home{
 	margin-top: 2em;
@@ -34,4 +34,35 @@ body{
 
 .navbar{
 	padding: 5px 0;
+}
+
+
+.imagen-modal{
+	margin-left: 1em;
+}
+
+.container-user{
+	margin-bottom: 1em;
+}
+
+.glyphicon-user{
+	font-size: 3em;
+}
+
+.container-items-modal{
+	padding:0 3em;
+}
+.subtitle-modal{
+	font: 3em bold;
+	text-shadow: 0 2px 2px #000;
+	padding-left: 2em;
+	margin-top: 2em;
+}
+.container-description-modal{
+	vertical-align: top;
+	font-size: 1.5em;
+}
+.panel{
+	margin-bottom: 6em;
+
 }
