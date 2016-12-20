@@ -14,8 +14,8 @@ var bodyView = Backbone.View.extend({
 
 
 	buscar_ciudades: function(){
-		var cadena = $('#buscador-ciudades').val();
-		console.log(cadena);
+		var cadena_ciudades = $('#buscador-ciudades').val();
+		console.log(cadena_ciudades);
 		//$('.containers-restaurantes').html("hola viejo");
 
 	},
@@ -61,7 +61,12 @@ var detalleView = Backbone.View.extend({
 				'success'
 			);
 			console.log("eliminado");
-			console.log(e.target);
+
+
+			var instanciaTips2 = new tipsModel();
+			var datoId = $(".eliminar-tip").attr("data-id");
+			console.log(datoId);
+			instanciaTips2.deleteTipById(datoId,{type: 'POST'});
 		});
 	},
 	guardarToModel : function(){
@@ -83,6 +88,7 @@ var detalleView = Backbone.View.extend({
 						'success'
 					);
 					$('#contador').html($('.textarea-modal').val().length);
+					window.cadena = "";
 			    },
 			    error: function(a){
 					swal(
