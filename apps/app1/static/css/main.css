@@ -42,7 +42,8 @@ body{
 }
 
 .container-user{
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
+	margin-top: 3em;
 }
 
 .glyphicon-user{
@@ -64,5 +65,50 @@ body{
 }
 .panel{
 	margin-bottom: 6em;
+	background: #eee;
 
+}
+
+.modal-footer{
+	margin-top: 2em;
+}
+
+.contador-modal{
+	width: 80px;
+	text-align: center;
+	position: absolute;
+	right: -80px;
+	top: 25px;
+	font-size:1.2em;
+}
+
+.textarea-modal{
+	max-width: 100%;
+	max-height: 100px;
+}
+.containers-restaurantes{
+	max-height: 200px;
+}
+.pie-de-pagina{
+	background: #616161;
+	padding-left: 25%;
+	width: 100%;
+}
+.items-footer small{
+	width: 100px;
+	height: 200px;
+}
+
+.link-inicio-sesion{
+	color: #FFF;
+	text-shadow: 0px 0px -3px #000;
+}
+.link-inicio-sesion:hover{
+	text-decoration: none;
+	color: #FFF;
+}
+.container-tips{
+	width: 100%;
+	border-bottom: 2px #eee solid;
+	padding-top: 1em;	
 }

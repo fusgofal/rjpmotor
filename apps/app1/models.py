@@ -8,6 +8,8 @@ class Category(models.Model):
 	name = models.CharField(max_length=50)
 	def __unicode__(self):
 		return self.name
+
+		
 class City(models.Model):
 	name = models.CharField(max_length=50)
 	def __unicode__(self):
@@ -40,3 +42,6 @@ class Tip(models.Model):
 	restaurant = models.ForeignKey(Restaurant)
 	user = models.ForeignKey(User)
 	content = models.CharField(max_length=200)
+
+	def __unicode__(self):
+		return self.content

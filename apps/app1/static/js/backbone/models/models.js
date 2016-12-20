@@ -4,4 +4,10 @@ window.restauranteModel = Backbone.Model.extend({
 
 });
 
+window.tipsModel = Backbone.Model.extend({
+	url: "api/tips/",
+	url_base: "api/tips/",
+
+});
+
 var todosRestaurantes = new restauranteModel();
