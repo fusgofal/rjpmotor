@@ -46,7 +46,6 @@ var detalleView = Backbone.View.extend({
 				content: window.cadena,
 				restaurant: window.id_restaurante,
 				user: window.usuario_id,
-				usuario: "asdasd",
 			};
 			var instanciaTips = new tipsModel();
 			instanciaTips.save(datos,{
@@ -138,32 +137,47 @@ var bodyView = Backbone.View.extend({
 	},
 	events:{
 		'keyup #buscador-ciudades' : 'buscar_ciudades',
-		'focus #buscador-ciudades' : 'r_ciudades',
 
-	},
-	r_ciudades: function(){
 	},
 
 	buscar_ciudades: function(){
-		var cadena_ciudades = $('#buscador-ciudades').val();
-		Inicializar_Dom();
-
-
-		function Inicializar_Dom(){
-			console.log("Hello World");
-			if (cadena_ciudades == 0) {
-				var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
-				RestaurantesView.render();
-			}else{
-				$('#container-restaurantes').html("");
-				$('#container-restaurantes').append("<div class='list-group'>																	<a data-id='' class='list-group-item containers-restaurantes'>				     											<div class='col-sm-4 div_imagen'>																								<img src='/media/{{restaurant.imagen.name}}' class='imgg_ img-rounded media-object img-responsive' alt='image'>			</div>																														<div class='col-sm-5'>																											<center><h3>Nombre restaurante</h3>																							<p>Toodo esto es la descripcion del restaurante </p></center>															</div>																														<div class='col-sm-3 text-center'>																								<h2>3 <small>tips</small></h2>		     																				</div>																														<button type='button' data-id='{{restaurant.id}}' class='btn btn-lg btn-primary restaurantes' >Ver Detalle </button>	</a></div>");
-
-			};
-		};
-	},
-
+		window.cadena_ciudades = $('#buscador-ciudades').val().toLowerCase();
+			Inicializar_Dom();
+		},
 
 });
+
+
+function Inicializar_Dom(){
+	if (window.cadena_ciudades.length == 0) {
+		var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
+		RestaurantesView.render();
+	}else{
+		$('#container-restaurantes').html("");
+		var instancia = new coleccion_restaurantes();
+		instancia.fetch({
+			success: function(a,b){
+				instancia.filter(function(modelo){
+					var cadenaModelo = modelo.get("name").substring(0, window.cadena_ciudades.length).toLowerCase();
+					if ((cadenaModelo == window.cadena_ciudades)) {
+						console.log("cadenas iguales");
+						$('#container-restaurantes').append("																					<div class='list-group'>																								<a data-id='"+ modelo.get('id') +"' class='list-group-item containers-restaurantes'>									<div class='col-sm-4 div_imagen'>																						<img src='/media/"+ modelo.get('imagen_name') +"' class='imgg_ img-rounded media-object img-responsive' alt='image'>																												</div>																												<div class='col-sm-5'>																									<center><h3>"+ modelo.get('name') +"</h3>																			<p>"+ modelo.get('desciption') +"</p></center>																	</div>																												<div class='col-sm-3 text-center'>																						<h2>"+ modelo.get('tip_set').length +"<small>tips</small></h2>													</div>																												<button type='button' data-id='"+ modelo.get('id') +"' class='btn btn-lg btn-primary restaurantes' >Ver Detalle </button>																												</a>																											</div>");
+					};
+				});
+			},
+			error: function(a,b){
+
+				console.error(instancia.toJSON());
+			},
+		});
+
+		
+	};
+		
+};
+
+
+
 
 var BodyView = new bodyView({el: '#container-body'});
 BodyView.render();
