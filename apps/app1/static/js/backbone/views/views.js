@@ -1,34 +1,4 @@
 
-
-
-var bodyView = Backbone.View.extend({
-	initialize: function(){
-		this.template = _.template($("#tplBody").html());
-	},
-	render: function(){
-		this.$el.html(this.template());
-	},
-	events:{
-		'keyup #buscador-ciudades' : 'buscar_ciudades',
-	},
-
-
-	buscar_ciudades: function(){
-		var cadena_ciudades = $('#buscador-ciudades').val();
-		console.log(cadena_ciudades);
-		//$('.containers-restaurantes').html("hola viejo");
-
-	},
-
-});
-
-var BodyView = new bodyView({el: '#container-body'});
-BodyView.render();
-
-
-
-
-
 var detalleView = Backbone.View.extend({
 	restaurante: [],
 	initialize: function(){
@@ -36,6 +6,7 @@ var detalleView = Backbone.View.extend({
 	},
 	events:{
 		"keyup .textarea-modal" : "contadorModal",
+		'keypress': 'TeclaPresionada',
 		"click #enviar-modal" : "guardarToModel",
 		"click .eliminar-tip" : "eliminarTip",
 		"click .editar-tip" : "editarTip",
@@ -64,7 +35,7 @@ var detalleView = Backbone.View.extend({
 
 
 			var instanciaTips2 = new tipsModel();
-			var datoId = $(".eliminar-tip").attr("data-id");
+			var datoId = $(e.target).attr("data-id");
 			console.log(datoId);
 			instanciaTips2.deleteTipById(datoId,{type: 'POST'});
 		});
@@ -104,7 +75,12 @@ var detalleView = Backbone.View.extend({
 			console.log("la cadena es muy larga");
 		};		
 	},
-	
+	TeclaPresionada:function(e){
+		var code = e.keyCode;
+        if(code == 13) { 
+			$("#enviar-modal").trigger("click");
+        }
+	},
 	contadorModal : function(e){
 		window.cadena = $('.textarea-modal').val();
 		$('#contador').html(window.cadena.length);
@@ -117,7 +93,6 @@ var detalleView = Backbone.View.extend({
 		}));
 	},
 });
-
 
 
 
@@ -143,20 +118,79 @@ var restaurantsView = Backbone.View.extend({
 				Vistadetalle.restaurante = todosRestaurantes.toJSON();
 				Vistadetalle.render();
 				$("#myModal").modal();
-
-
 			},
 			error: function(a, b){},
 		});
 	},
 });
+
+
+
+
+
+
+var bodyView = Backbone.View.extend({
+	initialize: function(){
+		this.template = _.template($("#tplBody").html());
+	},
+	render: function(){
+		this.$el.html(this.template());
+	},
+	events:{
+		'keyup #buscador-ciudades' : 'buscar_ciudades',
+		'focus #buscador-ciudades' : 'r_ciudades',
+
+	},
+	r_ciudades: function(){
+	},
+
+	buscar_ciudades: function(){
+		var cadena_ciudades = $('#buscador-ciudades').val();
+		Inicializar_Dom();
+
+
+		function Inicializar_Dom(){
+			console.log("Hello World");
+			if (cadena_ciudades == 0) {
+				var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
+				RestaurantesView.render();
+			}else{
+				$('#container-restaurantes').html("");
+				$('#container-restaurantes').append("<div class='list-group'>																	<a data-id='' class='list-group-item containers-restaurantes'>				     											<div class='col-sm-4 div_imagen'>																								<img src='/media/{{restaurant.imagen.name}}' class='imgg_ img-rounded media-object img-responsive' alt='image'>			</div>																														<div class='col-sm-5'>																											<center><h3>Nombre restaurante</h3>																							<p>Toodo esto es la descripcion del restaurante </p></center>															</div>																														<div class='col-sm-3 text-center'>																								<h2>3 <small>tips</small></h2>		     																				</div>																														<button type='button' data-id='{{restaurant.id}}' class='btn btn-lg btn-primary restaurantes' >Ver Detalle </button>	</a></div>");
+
+			};
+		};
+	},
+
+
+});
+
+var BodyView = new bodyView({el: '#container-body'});
+BodyView.render();
+
+
+
+
 var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
 RestaurantesView.render();
 
 
 
 
+var pieDePaginaView = Backbone.View.extend({
+	initialize: function(){
+		this.template = _.template($('#tplFooter').html());
+	},
+	render: function(){
+		this.$el.html(this.template());
+	},
+	events: {
 
+	},
+
+});
+var FooterView = new pieDePaginaView({el: '#container-pie-de-pagina'});
+FooterView.render();
 
 
 

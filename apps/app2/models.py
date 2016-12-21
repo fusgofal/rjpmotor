@@ -12,7 +12,7 @@ class Profesor(models.Model):
 	nombre = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=70)
 	materia = models.ManyToManyField(Materia)
-	documento = models.IntegerField(max_length=10)
+	documento = models.IntegerField()
 	def __unicode__(self):
 		return nombre
 
@@ -21,7 +21,7 @@ class Alumno(models.Model):
 	nombre = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=70)
 	materia = models.ManyToManyField(Materia)
-	documento = models.IntegerField(max_length=10)
+	documento = models.IntegerField()
 	def __unicode__(self):
 		return nombre
 
@@ -31,7 +31,7 @@ class Alumno(models.Model):
 class Tutor(models.Model):
 	alumno = models.ManyToManyField(Alumno)
 	nombre = models.CharField(max_length=50)
-	documento = models.IntegerField(max_length=10)
+	documento = models.IntegerField()
 	apellidos = models.CharField(max_length=70)
 	def __unicode__(self):
 		return nombre
