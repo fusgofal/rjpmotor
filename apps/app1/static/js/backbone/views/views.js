@@ -41,7 +41,7 @@ var detalleView = Backbone.View.extend({
 		});
 	},
 	guardarToModel : function(){
-		if (window.cadena.length  <= 200) {
+		if (window.cadena.length  <= 200 && window.cadena > 0) {
 			var datos = {
 				content: window.cadena,
 				restaurant: window.id_restaurante,
@@ -52,13 +52,14 @@ var detalleView = Backbone.View.extend({
 				type: 'POST',
 				success: function(a){
 					$('.textarea-modal').val("");
+					$('#contador').html($('.textarea-modal').val().length);
+					window.cadena = "";
+
 					swal(
 						'Comentario enviado',
 						'------------',
 						'success'
 					);
-					$('#contador').html($('.textarea-modal').val().length);
-					window.cadena = "";
 			    },
 			    error: function(a){
 					swal(
@@ -97,16 +98,33 @@ var detalleView = Backbone.View.extend({
 
 
 var restaurantsView = Backbone.View.extend({
-	initialize: function(){
-		this.template = _.template($('#tplRestaurantes').html());
-	},
-	render: function(){
-		this.$el.html(this.template());
-	},
+	fetch_restaurantes: " ",
+	el : '#container-restaurantes',
 	events: {
 		"click .restaurantes" : "verDetalleRestaurante",
 	},
+	initialize: function(){
+		this.fetch_restaurantes = new coleccion_restaurantes();		
+		this.template = _.template($('#tplRestaurantes').html());
+	},
+	render: function(){
+		var self = this;
+		$.each(this.fetch_restaurantes.toJSON(),function(cont, model){
+			self.$el.append(self.template({
+				restaurant: model,
+			}));
+		});
+	},
+	antesRender: function(){
+		var self = this;
+		self.fetch_restaurantes.fetch({
+			success: function(){
+				self.render();
+			},
+			error: function(){},
+		});
 
+	},
 	verDetalleRestaurante : function(e){
 		window.id_restaurante = $(e.target).attr('data-id');
 		todosRestaurantes.url = todosRestaurantes.url_base + window.id_restaurante +"/"
@@ -118,7 +136,13 @@ var restaurantsView = Backbone.View.extend({
 				Vistadetalle.render();
 				$("#myModal").modal();
 			},
-			error: function(a, b){},
+			error: function(a, b){
+				swal(
+				  'Oops...',
+				  'Algo va mal!',
+				  'error'
+				);
+			},
 		});
 	},
 });
@@ -151,7 +175,7 @@ var bodyView = Backbone.View.extend({
 function Inicializar_Dom(){
 	if (window.cadena_ciudades.length == 0) {
 		var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
-		RestaurantesView.render();
+		RestaurantesView.antesRender();
 	}else{
 		$('#container-restaurantes').html("");
 		var instancia = new coleccion_restaurantes();
@@ -166,8 +190,11 @@ function Inicializar_Dom(){
 				});
 			},
 			error: function(a,b){
-
-				console.error(instancia.toJSON());
+				swal(
+					"Oops",
+					"Algo malo está pasando!",
+					"error"
+				);
 			},
 		});
 
@@ -183,10 +210,9 @@ var BodyView = new bodyView({el: '#container-body'});
 BodyView.render();
 
 
-
-
 var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
-RestaurantesView.render();
+RestaurantesView.antesRender();
+
 
 
 
