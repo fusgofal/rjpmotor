@@ -51,8 +51,8 @@
 						<img src="<%= '/media/' + restaurant.imagen_name %>" class="imgg_ img-rounded media-object img-responsive" alt="image">
 					</div>
 					<div class="col-sm-5">
-						<center><h3><%= restaurant.name%></h3>
-						<p><%= restaurant.desciption%> </p></center>
+						<center><h3><%= restaurant.name%></h3></center>
+						<p><%= restaurant.desciption%> </p>	
 					</div>
 					<div class="col-sm-3 text-center">
 						<h2><%= restaurant.tip_set.length %>&#32;<small>tips</small></h2>
@@ -225,38 +225,36 @@
 	<script type="text/template" id="tplFooter">
 		<div class="footer-left">
 
-			<h3>Company<span>logo</span></h3>
+			<h3>Dollar<span>Soft</span></h3>
 
 			<p class="footer-links">
-				<a href="#">Home</a>
+				<a href="#">Productos</a>
 				·
-				<a href="#">Blog</a>
+				<a href="#">Social</a>
 				·
-				<a href="#">Pricing</a>
+				<a href="#">Sobre Nosotros</a>
 				·
-				<a href="#">About</a>
-				·
-				<a href="#">Contact</a>
+				<a href="#">Contáctanos</a>
 			</p>
 
-			<p class="footer-company-name">Company Name &copy; 2015</p>
+			<p class="footer-company-name">DollarSoft  &copy; 2016</p>
 		</div>
 
 		<div class="footer-center">
 
 			<div>
 				<i class="fa fa-map-marker"></i>
-				<p><span>21 Revolution Street</span> Paris, France</p>
+				<p><span>21 Revolution Street</span> Pereira, Colombia</p>
 			</div>
 
 			<div>
 				<i class="fa fa-phone"></i>
-				<p>+1 555 123456</p>
+				<p>+57 666 123456</p>
 			</div>
 
 			<div>
 				<i class="fa fa-envelope"></i>
-				<p><a href="mailto:support@company.com">support@company.com</a></p>
+				<p><a href="mailto:support@company.com">info@dollarsoft.com</a></p>
 			</div>
 
 		</div>
@@ -264,7 +262,7 @@
 		<div class="footer-right">
 
 			<p class="footer-company-about">
-				<span>About the company</span>
+				<span>Sobre Nosotros</span>
 				Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
 			</p>
 
@@ -312,19 +310,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">.::RJP-Motors::.</a>
-			</div>
-				{% if user.is_authenticated %}
+				<a class="navbar-brand" href="">Restaurantes.Com</a>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					 <ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+	        				<li class="active"><a href="#">{{user.username}}<span class="sr-only">(current)</span></a></li>
+								
+							</div>
+						{% else %}
 						<div class="btn btn-primary botton_user col-sm-2">
-							{{user.username}}
+	        				<li class="active"><a href="{% url 'social:begin' 'facebook' %}">Facebook<span class="sr-only">(current)</span></a></li>
 						</div>
-				{% else %}
-					<div class="btn btn-primary botton_user col-sm-2">
-						<a href="{% url 'social:begin' 'facebook' %}" class="link-inicio-sesion"><h5>Ingrese Con Facebook</h5></a>
-					
-					</div>
 
-				{% endif %}
+						{% endif %}
+
+
+	        		</ul>
+        		</div>
+			</div>
+				
 				
 		</div>
 	</nav>
@@ -358,7 +362,12 @@
 	<script src="{% static 'js/backbone/models/models.js' %}"></script>
 	<script src="{% static 'js/backbone/routes/ruta.js' %}"></script>
 	<script src="{% static 'js/backbone/collections/collections.js' %}"></script>
+
+	<script src="{% static 'js/backbone/views/DetalleView.js' %}"></script>
+	<script src="{% static 'js/backbone/views/RestaurantView.js' %}"></script>
+	<script src="{% static 'js/backbone/views/FooterView.js' %}"></script>
 	<script src="{% static 'js/backbone/views/views.js' %}"></script>
+
 	<script src="{% static 'js/permisos.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 
