@@ -23,9 +23,6 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
 
-
-	
-
 	<script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
@@ -46,18 +43,18 @@
 
 	<script type="text/template" id="tplRestaurantes">
 			<div class="list-group">
-				<a data-id="restaurant.id" class="list-group-item containers-restaurantes">
+				<a data-id="<%= item.id %>" class="list-group-item containers-restaurantes">
 					<div class="col-sm-4 div_imagen">
-						<img src="<%= '/media/' + restaurant.imagen_name %>" class="imgg_ img-rounded media-object img-responsive" alt="image">
+						<img src="<%= '/media/' + item.imagen_name %>" class="imgg_ img-rounded media-object img-responsive" alt="image">
 					</div>
 					<div class="col-sm-5">
-						<center><h3><%= restaurant.name%></h3></center>
-						<p><%= restaurant.desciption%> </p>	
+						<center><h3><%= item.name %></h3></center>
+						<p><%= item.desciption %> </p>	
 					</div>
 					<div class="col-sm-3 text-center">
-						<h2><%= restaurant.tip_set.length %>&#32;<small>tips</small></h2>
+						<h2><%= item.tip_set.length %> &#32;<small>tips</small></h2>
 					</div>
-					<button type="button" data-id="<%= restaurant.id %>" class="btn btn-lg btn-primary restaurantes" >Ver Detalle </button>
+					<button type="button" data-id="<%= item.id %>" class="btn btn-lg btn-primary restaurantes" >Ver Detalle </button>
 				</a>
 			</div>
 

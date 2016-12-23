@@ -1,5 +1,9 @@
+var cadena_ciudades = "$";
+
+
 
 var bodyView = Backbone.View.extend({
+	text_search: "",
 	initialize: function(){
 		this.template = _.template($("#tplBody").html());
 	},
@@ -7,48 +11,28 @@ var bodyView = Backbone.View.extend({
 		this.$el.html(this.template());
 	},
 	events:{
-		'keyup #buscador-ciudades' : 'buscar_ciudades',
+		//'keyup #buscador-ciudades' : 'buscar_ciudades',
+		'keyup #buscador-ciudades' : 'llamarOtraView',
 
 	},
+	
+	llamarOtraView: function(){
+		this.timer;
+		if (this.timer) { window.clearTimeout(this.timer); }
+		timer = setTimeout(function(){
+			cadena_ciudades = $('#buscador-ciudades').val().toLowerCase();
+			if (cadena_ciudades != self.text_search) {
+				self.text_search = cadena_ciudades;
+				$('#container-restaurantes').html("");
 
-	buscar_ciudades: function(){
-		window.cadena_ciudades = $('#buscador-ciudades').val().toLowerCase();
-			this.Inicializar_Dom();
-		},
+				var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
+				RestaurantesView.cadena = cadena_ciudades;
+				RestaurantesView.antesRender();
+			};
 
-
-	Inicializar_Dom: function (){
-
-		if (window.cadena_ciudades.length == 0) {
-			var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
-			RestaurantesView.antesRender();
-		}else{
-			$('#container-restaurantes').html("");
-			var instancia = new coleccion_restaurantes();
-			instancia.fetch({
-				modelos_filtro: [],
-				success: function(a,b){
-					instancia.filter(function(modelo){
-						var cadenaModelo = modelo.get("name").substring(0, window.cadena_ciudades.length).toLowerCase();
-						if ((cadenaModelo == window.cadena_ciudades)) {
-							$('#container-restaurantes').append("																					<div class='list-group'>																								<a data-id='"+ modelo.get('id') +"' class='list-group-item containers-restaurantes'>									<div class='col-sm-4 div_imagen'>																						<img src='/media/"+ modelo.get('imagen_name') +"' class='imgg_ img-rounded media-object img-responsive' alt='image'>																												</div>																												<div class='col-sm-5'>																									<center><h3>"+ modelo.get('name') +"</h3>																			<p>"+ modelo.get('desciption') +"</p></center>																	</div>																												<div class='col-sm-3 text-center'>																						<h2>"+ modelo.get('tip_set').length +"<small> tips</small></h2>													</div>																												<button type='button' data-id='"+ modelo.get('id') +"' class='btn btn-lg btn-primary restaurantes' >Ver Detalle </button>																												</a>																											</div>");
-						};
-					});
-				},
-				error: function(a,b){
-					swal(
-						"Oops",
-						"Algo malo está pasando!",
-						"error"
-					);
-				},
-			});
-
-			
-		};
-			
+		 }, 1000);
+		this.timer = false;
 	},
-
 });
 
 
@@ -61,7 +45,7 @@ BodyView.render();
 
 
 var RestaurantesView = new restaurantsView({el: '#container-restaurantes'});
-RestaurantesView.antesRender();
+RestaurantesView.antesRender(cadena_ciudades);
 
 
 var FooterView = new pieDePaginaView({el: '#container-pie-de-pagina'});
